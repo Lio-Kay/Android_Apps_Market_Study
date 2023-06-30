@@ -4,6 +4,7 @@ import pandas as pd
 
 from reviews_data_stat import get_and_validate_reviews_data
 
+
 sns.set_theme(style='dark')
 
 reviews_df = get_and_validate_reviews_data()

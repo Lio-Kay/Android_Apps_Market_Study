@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from apps_data_stat import get_and_validate_app_data, get_all_genres
+from data_func.apps_data_stat import get_and_validate_app_data, get_all_genres
 
 
 sns.set_theme(style='dark')

@@ -1,12 +1,11 @@
-from utils.apps_data_stat import *
-from utils.apps_data_vis import *
+from data_func.apps_data_stat import *
+from data_func.apps_data_vis import *
 
 
 def tests() -> None:
     """
-    Почти нет смысла pytest т.к
-    Датасет может менятся
-    Корректность графиков нужно контролировать визуально
+    Почти нет смысла pytest т.к. датасет может меняться.
+    Корректность графиков нужно контролировать визуально.
     """
     get_data_overview()
     get_all_categories()

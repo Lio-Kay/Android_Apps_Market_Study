@@ -1,15 +1,13 @@
-from apps_data_stat import *
-from apps_data_vis import *
+from data_func.apps_data_stat import get_data_overview, get_all_categories, get_all_genres, get_x_most_popular_genres,\
+    get_x_most_popular_apps, get_mean_rating_size_price_installs, get_median_rating_size_price_installs
+from data_func.apps_data_vis import visualize_categories, visualize_genres, visualize_rating_per_genre,\
+    visualize_rating_as_boxenplot, visualize_size_per_genre, visualize_free_and_paid_per_genre,\
+    visualize_price_as_scatterplot, visualize_installs_per_genre, visualize_optimal_app_size_per_genre
 from manual_testing import tests
 import os
 
 
-try:
-    os.mkdir(path='data_visualization')
-except FileExistsError:
-    pass
-
-MAIN_MENU ="""
+MAIN_MENU = """
 '1': Получить общую информацию о массиве данных
 '2': Вывести все категории приложений
 '3': Вывести все жанры приложений
@@ -59,6 +57,12 @@ VISUALISATION_FUNCTION_CHOICES = {
 
 
 def user_menu():
+    # Создаем папку для графиков, если её нет
+    try:
+        os.mkdir(path='data_visualization')
+    except FileExistsError:
+        pass
+
     user_input = input(MAIN_MENU+'\n')
     while user_input != '0':
         if user_input in (MAIN_FUNCTION_CHOICES.keys()):
@@ -66,7 +70,7 @@ def user_menu():
             user_input = input(MAIN_MENU + '\n')
         elif user_input == '8':
             user_second_input = input(VISUALISATION_MENU)
-            while user_second_input !='0':
+            while user_second_input != '0':
                 if user_second_input in list(VISUALISATION_FUNCTION_CHOICES.keys()):
                     VISUALISATION_FUNCTION_CHOICES[user_second_input]()
                     user_input = input(MAIN_MENU+'\n')
@@ -76,6 +80,9 @@ def user_menu():
         else:
             print('Недействительный выбор\n')
             user_input = input(MAIN_MENU)
+
+
+print('Программа завершена')
 
 
 if __name__ == '__main__':

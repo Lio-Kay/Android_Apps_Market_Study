@@ -1,9 +1,10 @@
 import numpy as np
 import pandas as pd
+import pathlib
 
 
 def get_and_validate_app_data():
-    with open(file='data/googleplaystore.csv', mode='r', encoding='utf-8') as apps_data:
+    with open(file=pathlib.Path.cwd() / 'data' / 'googleplaystore.csv', mode='r', encoding='utf-8') as apps_data:
         raw_apps_df = pd.read_csv(apps_data)
     # Удаляем строки если есть NaN в столбцах Rating, Content Rating, Type
     raw_apps_df.dropna(how='any', inplace=True, subset=['Rating', 'Content Rating', 'Type'])

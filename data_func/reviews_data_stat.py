@@ -44,5 +44,3 @@ def get_all_remaining_genres():
         else:
             print(number, a.replace('_', ' '))
             counter = 0
-
-
