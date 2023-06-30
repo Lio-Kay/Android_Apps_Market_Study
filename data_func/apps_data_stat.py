@@ -3,7 +3,11 @@ import pandas as pd
 import pathlib
 
 
-def get_and_validate_app_data():
+def get_and_validate_app_data() -> pd.DataFrame:
+    """
+    Функция для получения данных из файла и валидации для последующей работы.
+    :return: Валидированный <class 'pandas.core.frame.DataFrame'>
+    """
     with open(file=pathlib.Path.cwd() / 'data' / 'googleplaystore.csv', mode='r', encoding='utf-8') as apps_data:
         raw_apps_df = pd.read_csv(apps_data)
     # Удаляем строки если есть NaN в столбцах Rating, Content Rating, Type
@@ -31,6 +35,7 @@ def get_and_validate_app_data():
     )
     raw_apps_df['Installs'] = raw_apps_df['Installs'].apply(lambda x: float(x) / 100_000)
     validated_apps_df = raw_apps_df
+
     return validated_apps_df
 
 
@@ -39,8 +44,8 @@ apps_df = get_and_validate_app_data()
 
 def get_data_overview() -> None:
     """
-    Считает строки и стробцы в googleplaystore.csv
-    Выводит на печать результат
+    Считает строки и столбцы в googleplaystore.csv.
+    Выводит на печать результат.
     """
     rows, columns = apps_df.shape
     print(f'\nОбщий объем данных: {rows} строк, {columns} столбцов\n')
@@ -48,12 +53,12 @@ def get_data_overview() -> None:
 
 def get_all_categories() -> None:
     """
-    Выводит список категорий приложений
+    Выводит список категорий приложений в красивом виде.
     """
     number_of_categories = len(apps_df['Category'].unique())
     print(f'Всего в Playstore существует {number_of_categories} категорий приложений:')
     categories = apps_df['Category'].unique()
-    counter = 0
+    counter: int = 0
     for number, a in enumerate(categories, start=1):
         if counter < 4:
             print(number, a.replace('_', ' '), end=' | ')
@@ -66,15 +71,15 @@ def get_all_categories() -> None:
 
 def get_all_genres() -> None:
     """
-    Выводит список жанров приложений
+    Выводит список жанров приложений.
     """
     # Отбрасываем субжанры, в которых всего 1-3 приложения
     # print(apps_df.Genres.value_counts().tail(20))
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
-    number_of_genres = len(apps_df['Genres'].unique())
+    number_of_genres: int = len(apps_df['Genres'].unique())
     print(f'Всего в Playstore существует {number_of_genres} жанров приложений:')
     genres = apps_df['Genres'].unique()
-    counter = 0
+    counter: int = 0
     for number, a in enumerate(genres, start=1):
         if counter < 4:
             print(number, a.replace('_', ' '), end=' | ')
@@ -85,9 +90,9 @@ def get_all_genres() -> None:
     print('\n')
 
 
-def get_x_most_popular_genres():
+def get_x_most_popular_genres() -> None:
     """
-    Выводит X самых популярных жанров приложений
+    Выводит X самых популярных жанров приложений.
     """
     user_number = input('Выберете кол-во значений для вывода\n')
     try:
@@ -96,7 +101,7 @@ def get_x_most_popular_genres():
         print('Введите числовое значение')
         return
     if user_number == 0:
-        print('Выбранно 0 значений')
+        print('Выбрано 0 значений')
         return
     elif user_number == 1:
         print(f'Самый популярный жанр:\n{apps_df["Genres"].value_counts().head(user_number).to_string()}')
@@ -104,23 +109,24 @@ def get_x_most_popular_genres():
         print(f'Самые популярные жанры:\n{apps_df["Genres"].value_counts().head(user_number).to_string()}')
 
 
-def get_x_most_popular_apps():
+def get_x_most_popular_apps() -> None:
     """
-    Выводит X самых популярных приложений приложений из жанра на основании установок
+    Выводит X самых популярных приложений из жанра на основании установок.
     """
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
-    user_number = input('Выберете кол-во значений для вывода\n')
+    user_number: str = input('Выберете кол-во значений для вывода\n')
+    # Выводим список жанров
     get_all_genres()
-    user_genre = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
+    user_genre: str = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
     try:
-        user_number = int(user_number)
+        user_number: int = int(user_number)
     except ValueError:
         print('Введите числовое значение')
         return
 
     if user_number == 0:
-        print('Выбранно 0 значений')
+        print('Выбрано 0 значений')
         return
     elif user_number == 1:
         if user_genre == 'All':
@@ -154,43 +160,46 @@ def get_mean_rating_size_price_installs() -> None:
     """
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
+    # Выводим список жанров
     get_all_genres()
-    user_genre = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
-    user_type = input('Введите число типа данных для вывода: \n1: Рейтинг\n2: Размер\n3: Цена\n4: Кол-во установок\n')
+    user_genre: str = input(
+        'Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
+    user_type: str = input(
+        'Введите число типа данных для вывода: \n1: Рейтинг\n2: Размер\n3: Цена\n4: Кол-во установок\n')
     try:
-        user_type = int(user_type)
+        user_type: int = int(user_type)
     except ValueError:
         print('Введите числовое значение')
         return
     if user_genre == 'All':
         if user_type == 1:
-            rating_mean = apps_df['Rating'].describe().loc['mean']
+            rating_mean: str = apps_df['Rating'].describe().loc['mean']
             print(f'Средний рейтинг приложений равен:\n{rating_mean:.2f}')
         elif user_type == 2:
-            size_mean = apps_df['Size'].describe().loc['mean']
+            size_mean: str = apps_df['Size'].describe().loc['mean']
             print(f'Средний вес приложения равен:\n{size_mean:.2f} MB')
         elif user_type == 3:
-            price_mean = apps_df['Price'].describe().loc['mean']
+            price_mean: str = apps_df['Price'].describe().loc['mean']
             print(f'Средняя цена приложения равна:\n{price_mean:.2f}$')
         elif user_type == 4:
-            installs_mean = apps_df['Installs'].describe().loc['mean']
+            installs_mean: str = apps_df['Installs'].describe().loc['mean']
             print(f'Среднее кол-во установок приложений равно:\n{installs_mean:.2f} сотен тыс.')
         else:
             print('Такого типа данных не существует')
             return
     elif user_genre in genres:
         if user_type == 1:
-            rating_mean = apps_df[(apps_df['Genres'] == f'{user_genre}')]['Rating'].describe().loc['mean']
+            rating_mean: str = apps_df[(apps_df['Genres'] == f'{user_genre}')]['Rating'].describe().loc['mean']
             print(f'Средний рейтинг приложения в жанре {user_genre} равен:\n{rating_mean:.2f}')
         elif user_type == 2:
-            size_mean = apps_df[(apps_df['Genres'] == f'{user_genre}')]['Size'].describe().loc['mean']
+            size_mean: str = apps_df[(apps_df['Genres'] == f'{user_genre}')]['Size'].describe().loc['mean']
             print(f'Средний вес приложения в жанре {user_genre} равен:\n{size_mean:.2f} MB')
         elif user_type == 3:
-            price_mean = apps_df[(apps_df['Genres'] == f'{user_genre}')]['Price'].describe().loc['mean']
+            price_mean: str = apps_df[(apps_df['Genres'] == f'{user_genre}')]['Price'].describe().loc['mean']
             print(f'Средняя цена приложения в жанре {user_genre} равна:\n{price_mean:.2f}$')
         elif user_type == 4:
-            installs_mean = apps_df[(apps_df['Genres'] == f'{user_genre}')]['Price'].describe().loc['mean']
-            print(f'Средее кол-во установок приложений в жанре {user_genre} равно:\n{installs_mean:.2f} сотен тыс.')
+            installs_mean: str = apps_df[(apps_df['Genres'] == f'{user_genre}')]['Price'].describe().loc['mean']
+            print(f'Среднее кол-во установок приложений в жанре {user_genre} равно:\n{installs_mean:.2f} сотен тыс.')
         else:
             print('Такого типа данных не существует')
             return
@@ -204,6 +213,7 @@ def get_median_rating_size_price_installs() -> None:
     """
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
+    # Выводим список жанров
     get_all_genres()
     user_genre = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
     user_type = input('Введите число типа данных для вывода: \n1: Рейтинг\n2: Размер\n3: Цена\n4: Кол-во установок\n')

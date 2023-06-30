@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 from apps_data_stat import get_and_validate_app_data
 
@@ -9,11 +8,15 @@ apps_df = get_and_validate_app_data()
 apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
 
 
-def get_and_validate_reviews_data():
+def get_and_validate_reviews_data() -> None:
+    """
+
+    """
     with open(file='../data/googleplaystore_user_reviews.csv', mode='r', encoding='utf-8') as apps_data:
         raw_reviews_df = pd.read_csv(apps_data)
     # Объединяем данные из googleplaystore_user_reviews.csv и googleplaystore.csv через 'App'
     merged_reviews_df = pd.merge(left=apps_df, right=raw_reviews_df, on='App', how='inner')
+    print(merged_reviews_df)
     # Удаляем строки если есть NaN в столбцах Sentiment, Translated_Review
     merged_reviews_df = merged_reviews_df.dropna(subset=['Sentiment', 'Translated_Review'])
     # Получаем число негативных, нейтральных и положительных Sentiment по каждому жанру

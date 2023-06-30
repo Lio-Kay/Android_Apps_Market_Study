@@ -11,8 +11,8 @@ apps_df = get_and_validate_app_data()
 
 def visualize_categories() -> None:
     """
-    Визуализирует распределение категории приложений
-    Сохраняет график в файл
+    Визуализирует распределение категории приложений.
+    Сохраняет график в файл.
     """
     plt.figure(num=1)
     plt.grid()
@@ -28,8 +28,8 @@ def visualize_categories() -> None:
 
 def visualize_genres() -> None:
     """
-    Визуализирует распределение жанров приложений
-    Сохраняет график в файл
+    Визуализирует распределение жанров приложений.
+    Сохраняет график в файл.
     """
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     plt.figure(num=1)
@@ -46,8 +46,8 @@ def visualize_genres() -> None:
 
 def visualize_rating_per_genre() -> None:
     """
-    Визуализирует распределение рейтинга приложений
-    Сохраняет график в файл
+    Визуализирует распределение рейтинга приложений.
+    Сохраняет график в файл.
     """
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
@@ -75,8 +75,8 @@ def visualize_rating_per_genre() -> None:
 
 def visualize_rating_as_boxenplot() -> None:
     """
-    Визуализирует общее распределение рейтинга приложений в виде boxenplot
-    Сохраняет график в файл
+    Визуализирует общее распределение рейтинга приложений в виде boxenplot.
+    Сохраняет график в файл.
     """
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     a = sns.catplot(data=apps_df, x='Genres', y='Rating', kind='boxen', height=10, palette='Set3')
@@ -94,8 +94,8 @@ def visualize_rating_as_boxenplot() -> None:
 
 def visualize_size_per_genre() -> None:
     """
-    Визуализирует распределение размера приложений
-    Сохраняет график в файл
+    Визуализирует распределение размера приложений.
+    Сохраняет график в файл.
     """
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
@@ -122,8 +122,8 @@ def visualize_size_per_genre() -> None:
 
 def visualize_free_and_paid_per_genre() -> None:
     """
-    Визуализирует % бесплатных приложений
-    Сохраняет график в файл
+    Визуализирует % бесплатных приложений.
+    Сохраняет график в файл.
     """
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
@@ -151,8 +151,8 @@ def visualize_free_and_paid_per_genre() -> None:
 
 def visualize_price_as_scatterplot() -> None:
     """
-    Визуализирует распределение цены приложений по жанру на отдельном графике
-    Сохраняет график в файл
+    Визуализирует распределение цены приложений по жанру на отдельном графике.
+    Сохраняет график в файл.
     """
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     sns.set_style('darkgrid')
@@ -176,8 +176,8 @@ def visualize_price_as_scatterplot() -> None:
 
 def visualize_installs_per_genre() -> None:
     """
-    Визуализирует распределение установок приложений
-    Сохраняет график в файл
+    Визуализирует распределение установок приложений.
+    Сохраняет график в файл.
     """
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
@@ -204,8 +204,8 @@ def visualize_installs_per_genre() -> None:
 
 def visualize_optimal_app_size_per_genre() -> None:
     """
-    Визуализирует зависимость между рейтингом и размером приложений
-    Сохраняет график в файл
+    Визуализирует зависимость между рейтингом и размером приложений.
+    Сохраняет график в файл.
     """
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
