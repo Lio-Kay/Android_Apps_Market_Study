@@ -118,7 +118,7 @@ def get_x_most_popular_apps() -> None:
     user_number: str = input('Выберете кол-во значений для вывода\n')
     # Выводим список жанров
     get_all_genres()
-    user_genre: str = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
+    user_genre: str = input('Введите название жанра или "All" для вывода всех жанров\n').casefold()
     try:
         user_number: int = int(user_number)
     except ValueError:
@@ -129,7 +129,7 @@ def get_x_most_popular_apps() -> None:
         print('Выбрано 0 значений')
         return
     elif user_number == 1:
-        if user_genre == 'All':
+        if user_genre == 'all':
             print(f'Самое популярное приложение:\n{apps_df.nlargest(user_number, ["Installs"]).to_string()}')
             return
         elif user_genre in genres:
@@ -141,7 +141,7 @@ def get_x_most_popular_apps() -> None:
             print('Такого жанра не существует')
             return
     else:
-        if user_genre == 'All':
+        if user_genre == 'all':
             print(f'Самые популярные приложения:\n{apps_df.nlargest(user_number, ["Installs"]).to_string()}')
             return
         elif user_genre in genres:
@@ -163,15 +163,15 @@ def get_mean_rating_size_price_installs() -> None:
     # Выводим список жанров
     get_all_genres()
     user_genre: str = input(
-        'Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
+        'Введите название жанра или "All" для вывода всех жанров\n').casefold()
     user_type: str = input(
-        'Введите число типа данных для вывода: \n1: Рейтинг\n2: Размер\n3: Цена\n4: Кол-во установок\n')
+        'Выберете тип данных для вывода в виде числа: \n1: Рейтинг\n2: Размер\n3: Цена\n4: Кол-во установок\n')
     try:
         user_type: int = int(user_type)
     except ValueError:
         print('Введите числовое значение')
         return
-    if user_genre == 'All':
+    if user_genre == 'all':
         if user_type == 1:
             rating_mean: str = apps_df['Rating'].describe().loc['mean']
             print(f'Средний рейтинг приложений равен:\n{rating_mean:.2f}')
@@ -215,14 +215,16 @@ def get_median_rating_size_price_installs() -> None:
     genres = apps_df['Genres'].unique()
     # Выводим список жанров
     get_all_genres()
-    user_genre = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
-    user_type = input('Введите число типа данных для вывода: \n1: Рейтинг\n2: Размер\n3: Цена\n4: Кол-во установок\n')
+    user_genre = input(
+        'Введите название жанра или "All" для вывода всех жанров\n').casefold()
+    user_type = input(
+        'Выберете тип данных для вывода в виде числа:\n1: Рейтинг\n2: Размер\n3: Цена\n4: Кол-во установок\n')
     try:
         user_type = int(user_type)
     except ValueError:
         print('Введите числовое значение')
         return
-    if user_genre == 'All':
+    if user_genre == 'all':
         if user_type == 1:
             rating_median = apps_df['Rating'].describe().loc['50%']
             print(f'Медианный рейтинг приложения равен:\n{rating_median}')

@@ -52,11 +52,11 @@ def visualize_rating_per_genre() -> None:
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
     get_all_genres()
-    user_choice = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
+    user_choice = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n').casefold()
     plt.figure(num=2)
     plt.grid()
     print(genres)
-    if user_choice == 'All':
+    if user_choice == 'all':
         a = sns.kdeplot(data=apps_df['Rating'], color='Darkblue', fill=True)
     elif user_choice in genres:
         a = sns.kdeplot(data=apps_df[(apps_df['Genres'] == f'{user_choice}')]['Rating'], color='Darkblue', fill=True)
@@ -100,10 +100,10 @@ def visualize_size_per_genre() -> None:
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
     get_all_genres()
-    user_choice = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
+    user_choice = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n').casefold()
     plt.figure(num=3)
     plt.grid()
-    if user_choice == 'All':
+    if user_choice == 'all':
         a = sns.kdeplot(data=apps_df['Size'], color='Teal', fill=True)
         a.set_title(f'Распределение размеров приложений ', size=40)
     elif user_choice in genres:
@@ -128,10 +128,10 @@ def visualize_free_and_paid_per_genre() -> None:
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
     get_all_genres()
-    user_choice = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
+    user_choice = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n').casefold()
     plt.figure(num=4)
     plt.grid()
-    if user_choice == 'All':
+    if user_choice == 'all':
         plt.pie(x=apps_df['Type'].value_counts(sort=True), explode=(0.2, 0),
                 labels=apps_df['Type'].value_counts(sort=True).index, colors=['LightBlue', 'GhostWhite'],
                 autopct='%1.2f%%', shadow=True, startangle=200)
@@ -182,10 +182,10 @@ def visualize_installs_per_genre() -> None:
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
     get_all_genres()
-    user_choice = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
+    user_choice = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n').casefold()
     plt.figure(num=4)
     sns.set_style('darkgrid')
-    if user_choice == 'All':
+    if user_choice == 'all':
         a = sns.kdeplot(data=apps_df['Installs'], color='Navy', fill=True)
         a.set_title(f'Распределение установок приложений', size=40)
     elif user_choice in genres:
@@ -210,11 +210,11 @@ def visualize_optimal_app_size_per_genre() -> None:
     apps_df['Genres'] = apps_df['Genres'].str.split(';').str[0]
     genres = apps_df['Genres'].unique()
     get_all_genres()
-    user_choice = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n')
+    user_choice = input('Выберете жанр для вывода или введите "All" для вывода всех жанров\n').casefold()
     plt.figure(num=5)
     plt.grid()
     sns.set_style("darkgrid")
-    if user_choice == 'All':
+    if user_choice == 'all':
         a = sns.jointplot(data=apps_df, x=apps_df['Size'], y=apps_df['Rating'], color='DarkCyan')
         a.fig.suptitle(f'Зависимость между рейтингом и размером приложений', size=40)
     elif user_choice in genres:
