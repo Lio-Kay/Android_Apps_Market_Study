@@ -38,18 +38,19 @@ VISUALISATION_MENU: str = """
     '7': Визуализировать распределение цены приложений по жанру
     '8': Визуализировать число установок по жанру
     '9': Визуализировать зависимость между рейтингом и размером приложений
+    '0': Вернутся в главное меню
     """
 
 VISUALISATION_FUNCTION_CHOICES: dict = {
-    '1': visualize_categories,
-    '2': visualize_genres,
-    '3': visualize_rating_per_genre,
-    '4': visualize_rating_as_boxenplot,
-    '5': visualize_size_per_genre,
-    '6': visualize_free_and_paid_per_genre,
-    '7': visualize_price_as_scatterplot,
-    '8': visualize_installs_per_genre,
-    '9': visualize_optimal_app_size_per_genre
+    '1': vis_categories,
+    '2': vis_genres,
+    '3': vis_rating_per_genre,
+    '4': vis_rating_as_boxenplot,
+    '5': vis_size_per_genre,
+    '6': vis_free_and_paid_per_genre,
+    '7': vis_price_as_scatterplot,
+    '8': vis_installs_per_genre,
+    '9': vis_optimal_app_size_per_genre
 }
 
 
@@ -72,14 +73,15 @@ def user_menu() -> None:
             user_input = input(MAIN_MENU + '\n')
         # Меню визуализации данных
         elif user_input == '8':
-            user_second_input = input(VISUALISATION_MENU)
+            user_second_input = input(VISUALISATION_MENU + '\n')
             while user_second_input != '0':
                 if user_second_input in list(VISUALISATION_FUNCTION_CHOICES.keys()):
                     VISUALISATION_FUNCTION_CHOICES[user_second_input]()
-                    user_input = input(MAIN_MENU+'\n')
+                    user_second_input = input(VISUALISATION_MENU + '\n')
                 else:
                     print('Недействительный выбор\n')
-                    user_second_input = input(VISUALISATION_MENU)
+                    user_second_input = input(VISUALISATION_MENU + '\n')
+            user_input = input(MAIN_MENU + '\n')
         else:
             print('Недействительный выбор\n')
             user_input = input(MAIN_MENU)

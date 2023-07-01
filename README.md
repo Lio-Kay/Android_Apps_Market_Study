@@ -24,7 +24,8 @@
 Ссылка на датасет: https://www.kaggle.com/datasets/lava18/google-play-store-apps
 
 ## Пример получаемых графиков
-
+![usage_example_1.png](readme_assets%2Fusage_example_1.png)
+![usage_example_2.png](readme_assets%2Fusage_example_2.png)
 
 ## Описание структуры проекта
 * data
