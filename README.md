@@ -27,7 +27,7 @@
 ![usage_example_1.png](readme_assets%2Fusage_example_1.png)
 ![usage_example_2.png](readme_assets%2Fusage_example_2.png)
 
-## Описание структуры проекта
+## Структура проекта
 * data
   - googleplaystore.csv - датасет из +10.000 приложений Google Play
   - googleplaystore_user_reviews.csv - датасет из +60.000 отзывов пользователей на Google Play
@@ -41,17 +41,26 @@
 - main.py - Меню и файл объединяющий всю логику
 - manual_testing.py - Файл для получения 'инфодампа' т.к. корректность графиков можно контролировать только визуально
 
+## Инициализация проекта
+
+  ```sh
+  git clone https://github.com/Lio-Kay/Pandas_Android_Apps_Market_Study
+  cd .\PandasAndroidMarket\
+  poetry install
+  python main.py
+  ```
+
 ## Технологии в проекте
 Библиотеки:
-* os;
-* pandas;
-* numpy;
-* matplotlib;
-* seaborn.
+* os
+* pandas
+* numpy
+* matplotlib
+* seaborn
 
 Другие особенности:
-* poetry вместо venv/pip;
-* Отлов большинства ошибок взаимодействия пользователя с CLI.
+* poetry вместо venv/pip
+* Отлов большинства ошибок взаимодействия пользователя с CLI
 
 ## Возможные улучшения
 * Обработать отзывы
