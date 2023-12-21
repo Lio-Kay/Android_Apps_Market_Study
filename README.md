@@ -1,8 +1,9 @@
-# Исследование рынка Android приложений при помощи библиотеки Pandas
+# Исследование рынка Android приложений при помощи Pandas
 
 ## Описание
-Исследование рынка Android приложений с помощью pandas, seaborn, matplot, основанное на датасете kaggle.
-Взаимодействие осуществляется через CLI. Программа может отображать следующие данные о приложениях Google Play Store.
+Исследование рынка Android приложений с помощью pandas, seaborn, matplot,
+основанное на датасете kaggle. Взаимодействие осуществляется через CLI.
+Программа может отображать следующие данные о приложениях Google Play Store.
 
 Визуализация:
 * визуализировать категории 
@@ -27,28 +28,28 @@
 ![usage_example_1.png](readme_assets%2Fusage_example_1.png)
 ![usage_example_2.png](readme_assets%2Fusage_example_2.png)
 
-## Структура проекта
-* data
-  - googleplaystore.csv - датасет из +10.000 приложений Google Play
-  - googleplaystore_user_reviews.csv - датасет из +60.000 отзывов пользователей на Google Play
-* data_visualization - файл для вывода различных графиков и диаграмм
-* data_func
-  - apps_data_stat.py - Файл для получения информации о приложениях в текстовом виде
-  - apps_data_vis.py - Файл с для визуализации данных о приложения
-  - reviews_data_stat - !work_in_progress! Файл для получения информации об отзывах в текстовом виде
-  - reviews_data_vis - !work_in_progress! Файл с для визуализации данных об отзывах
-* readme_assets - Файлы для README.md
-- main.py - Меню и файл объединяющий всю логику
-- manual_testing.py - Файл для получения 'инфодампа' т.к. корректность графиков можно контролировать только визуально
-
 ## Инициализация проекта
-
   ```sh
   git clone https://github.com/Lio-Kay/Pandas_Android_Apps_Market_Study
-  cd .\PandasAndroidMarket\
+  cd PandasAndroidMarket/
+  poetry shell
   poetry install
   python main.py
   ```
+
+## Структура проекта
+* data
+  * googleplaystore.csv - датасет из +10.000 приложений Google Play
+  * googleplaystore_user_reviews.csv - датасет из +60.000 отзывов пользователей на Google Play
+* data_visualization - файл для вывода различных графиков и диаграмм
+* data_func
+  * apps_data_stat.py - Файл для получения информации о приложениях в текстовом виде
+  * apps_data_vis.py - Файл с для визуализации данных о приложения
+  * reviews_data_stat - !work_in_progress! Файл для получения информации об отзывах в текстовом виде
+  *reviews_data_vis - !work_in_progress! Файл с для визуализации данных об отзывах
+* readme_assets - Файлы для README.md
+* main.py - Меню и файл объединяющий всю логику
+* manual_testing.py - Файл для получения 'инфодампа' т.к. корректность графиков можно контролировать только визуально
 
 ## Технологии в проекте
 Библиотеки:
@@ -61,9 +62,3 @@
 Другие особенности:
 * poetry вместо venv/pip
 * Отлов большинства ошибок взаимодействия пользователя с CLI
-
-## Возможные улучшения
-* Обработать отзывы
-* Отрисовать все графики при помощи seaborn
-* Найти больше данных для датасета
-* Реализовать автоматическое обновление данных по ссылке
